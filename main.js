@@ -206,7 +206,7 @@ class GreeAircon extends utils.Adapter {
 							this.setStateAsync('air', this.currentProperties.air, true);//ack...
 							break;
 						}
-						this.Greeclient.setProperty(Gree.PROPERTY.air, state.val);
+						this.Greeclient.setProperty(Gree.PROPERTY.fanSpeed, state.val);
 						this.setStateAsync('air', state.val, true);//ack...
 						break;
 					}
@@ -251,24 +251,36 @@ class GreeAircon extends utils.Adapter {
 						break;
 					}
 					case 'swinghor': {
-						if (!['default', 'full', 'fixedLeft', 'fixedMidLeft', 'fixedMid', 'fixedMidRight', 'fixedRight'].includes(state.val)) {
-							this.log.error(`tried to set bad value for ${propName}:"${state.val}". Source:${state.from}`);
-							this.setStateAsync('swinghor', this.currentProperties.swinghor, true);//ack...
-							break;
+						try {
+
+							if (!['default', 'full', 'fixedLeft', 'fixedMidLeft', 'fixedMid', 'fixedMidRight', 'fixedRight'].includes(state.val)) {
+								this.log.error(`tried to set bad value for ${propName}:"${state.val}". Source:${state.from}`);
+								this.setStateAsync('swinghor', this.currentProperties.swinghor, true);//ack...
+								break;
+							}
+							this.Greeclient.setProperty(Gree.PROPERTY.swinghor, state.val);
+							this.setStateAsync('swinghor', state.val, true);//ack...
+						} catch(e) {
+							this.log.error(`could not set swinghor to ${state.val}: ${e.message}`)
+						} finally {
+							break
 						}
-						this.Greeclient.setProperty(Gree.PROPERTY.swinghor, state.val);
-						this.setStateAsync('swinghor', state.val, true);//ack...
-						break
 					}
 					case 'swingvert': {
-						if (!['default', 'full', 'fixedTop', 'fixedMidTop', 'fixedMid', 'fixedMidBottom', 'fixedBottom', 'swingBottom', 'swingMidBottom', 'swingMid', 'swingMidTop', 'swingTop'].includes(state.val)) {
-							this.log.error(`tried to set bad value for ${propName}:"${state.val}". Source:${state.from}`);
-							this.setStateAsync('swingvert', this.currentProperties.swingvert, true);//ack...
-							break;
+						try {
+
+							if (!['default', 'full', 'fixedTop', 'fixedMidTop', 'fixedMid', 'fixedMidBottom', 'fixedBottom', 'swingBottom', 'swingMidBottom', 'swingMid', 'swingMidTop', 'swingTop'].includes(state.val)) {
+								this.log.error(`tried to set bad value for ${propName}:"${state.val}". Source:${state.from}`);
+								this.setStateAsync('swingvert', this.currentProperties.swingvert, true);//ack...
+								break;
+							}
+							this.Greeclient.setProperty(Gree.PROPERTY.swingvert, state.val);
+							this.setStateAsync('swingvert', state.val, true);//ack...
+						} catch(e) {
+							this.log.error(`could not set swingvert to ${state.val}: ${e.message}`)
+						} finally {
+							break
 						}
-						this.Greeclient.setProperty(Gree.PROPERTY.swingvert, state.val);
-						this.setStateAsync('swingvert', state.val, true);//ack...
-						break
 					} 
 				}
 
