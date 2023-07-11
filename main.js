@@ -110,7 +110,7 @@ class GreeAircon extends utils.Adapter {
 
 		// add raw values
 		if(updateJson) this.setStateAsync('updateJsonRaw', updateJson, true);
-		if (properties) this.setStateAsync('propertiesRaw', properties, true);
+		// if (properties) this.setStateAsync('propertiesRaw', properties, true);
 		
 		  
 	}
