@@ -100,7 +100,7 @@ class GreeAircon extends utils.Adapter {
 			this.setStateAsync('powerSave', updatedProperties.powerSave == 'on', true);
 		
 		if ('currentTemperature' in updatedProperties) // In degrees Celsius by default. (Read-only)
-		this.setStateAsync('currentTemperature', updatedProperties.currentTemperature, true);
+		this.setStateAsync('currentTemperature', parseInt(updatedProperties.currentTemperature,10) , true);
 		
 		if ('swinghor' in updatedProperties) // default, full, fixedLeft, fixedMidLeft, fixedMid, fixedMidRight, fixedRight
 		this.setStateAsync('swinghor', updatedProperties.swinghor, true);
