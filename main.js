@@ -98,8 +98,21 @@ class GreeAircon extends utils.Adapter {
 			this.setStateAsync('turbo', updatedProperties.turbo == 'on', true);
 		if ('powerSave' in updatedProperties)
 			this.setStateAsync('powerSave', updatedProperties.powerSave == 'on', true);
+		
+		if ('currentTemperature' in updatedProperties) // In degrees Celsius by default. (Read-only)
+		this.setStateAsync('currentTemperature', updatedProperties.currentTemperature, true);
+		
+		if ('swinghor' in updatedProperties) // default, full, fixedLeft, fixedMidLeft, fixedMid, fixedMidRight, fixedRight
+		this.setStateAsync('swinghor', updatedProperties.swinghor, true);
+		
+		if ('swingvert' in updatedProperties) // default, full, fixedTop, fixedMidTop, fixedMid, fixedMidBottom, fixedBottom, swingBottom, swingMidBottom, swingMid, swingMidTop, swingTop
+		this.setStateAsync('swingvert', updatedProperties.swingvert, true);
 
-
+		// add raw values
+		if(updateJson) this.setStateAsync('updateJsonRaw', updateJson, true);
+		if (properties) this.setStateAsync('propertiesRaw', properties, true);
+		
+		  
 	}
 
 
@@ -237,6 +250,20 @@ class GreeAircon extends utils.Adapter {
 						this.setStateAsync('powerSave', state.val, true);//ack...
 						break;
 					}
+					case 'swinghor': {
+						if (!['default', 'full', 'fixedLeft', 'fixedMidLeft', 'fixedMid', 'fixedMidRight', 'fixedRight'].includes(state.val)) {
+							this.log.error(`tried to set bad value for ${propName}:"${state.val}". Source:${state.from}`);
+							this.setStateAsync('swinghor', this.currentProperties.swinghor, true);//ack...
+							break;
+						}
+					}
+					case 'swingvert': {
+						if (!['default', 'full', 'fixedTop', 'fixedMidTop', 'fixedMid', 'fixedMidBottom', 'fixedBottom', 'swingBottom', 'swingMidBottom', 'swingMid', 'swingMidTop', 'swingTop'].includes(state.val)) {
+							this.log.error(`tried to set bad value for ${propName}:"${state.val}". Source:${state.from}`);
+							this.setStateAsync('swingvert', this.currentProperties.swingvert, true);//ack...
+							break;
+						}
+					} 
 				}
 
 			}

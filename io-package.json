@@ -247,7 +247,90 @@
 				"def": false
 			},
 			"native": {}
+		},
+		{
+			"_id": "currentTemperature",
+			"type": "state",
+			"common": {
+				"role": "value.temperature",
+				"name": "current room temperature",
+				"type": "number",
+				"read": true,
+				"write": false,
+				"def": "noset"
+			},
+			"native": {}
+		},{
+			"_id": "swinghor",
+			"type": "state",
+			"common": {
+				"role": "level.mode.swing",
+				"name": "horizontal swing",
+				"type": "string",
+				"read": true,
+				"write": true,
+				"def": "noset",
+				"states": {  
+					"default": "default",
+					"full": "full",
+					"fixedLeft": "fixedLeft",
+					"fixedMidLeft": "fixedMidLeft",
+					"fixedMid": "fixedMid",
+					"fixedMidRight": "fixedMidRight",
+					"fixedRight": "fixedRight" 
+				}
+			},
+			"native": {}
+		},{
+			"_id": "swingvert",
+			"type": "state",
+			"common": {
+				"role": "level.mode.swing",
+				"name": "vertical swing",
+				"type": "string",
+				"read": true,
+				"write": true,
+				"def": "noset",
+				"states": { 
+					"default": "default",
+					"full": "full",
+					"fixedTop": "fixedTop",
+					"fixedMidTop": "fixedMidTop",
+					"fixedMid": "fixedMid",
+					"fixedMidBottom": "fixedMidBottom",
+					"fixedBottom": "fixedBottom",
+					"swingBottom": "swingBottom",
+					"swingMidBottom": "swingMidBottom",
+					"swingMid": "swingMid",
+					"swingMidTop": "swingMidTop",
+					"swingTop":"swingTop"
+				}
+			},
+			"native": {}
+		},{
+			"_id": "updateJsonRaw",
+			"type": "state",
+			"common": {
+				"role": "json",
+				"name": "raw updateJson",
+				"type": "string",
+				"read": true,
+				"write": false,
+				"def": "noset"
+			},
+			"native": {}
+		},{
+			"_id": "propertiesRaw",
+			"type": "state",
+			"common": {
+				"role": "json",
+				"name": "raw properties",
+				"type": "string",
+				"read": true,
+				"write": false,
+				"def": "noset"
+			},
+			"native": {}
 		}
-		
 	]
 }
