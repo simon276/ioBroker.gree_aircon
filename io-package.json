@@ -137,7 +137,7 @@
 			"common": {
 				"role": "",
 				"name": "Operationmode one of(auto, cool, heat, dry, fan_only)",
-				"type": "text",
+				"type": "string",
 				"read": true,
 				"write": true,
 				"def": "auto"
@@ -150,7 +150,7 @@
 			"common": {
 				"role": "",
 				"name": "Fan Speed one of(auto, low, mediumLow, medium, mediumHigh, high)",
-				"type": "text",
+				"type": "string",
 				"read": true,
 				"write": true,
 				"def": "auto"
@@ -163,7 +163,7 @@
 			"common": {
 				"role": "",
 				"name": "Air selection, one of(off, inside, outside, mode3)",
-				"type": "text",
+				"type": "string",
 				"read": true,
 				"write": true,
 				"def": "off"
@@ -215,7 +215,7 @@
 			"common": {
 				"role": "",
 				"name": "QuietMode (off, mode1, mode2, mode3)",
-				"type": "text",
+				"type": "string",
 				"read": true,
 				"write": true,
 				"def": "noset"
@@ -257,7 +257,7 @@
 				"type": "number",
 				"read": true,
 				"write": false,
-				"def": "noset"
+				"def": 0
 			},
 			"native": {}
 		},{
@@ -270,15 +270,15 @@
 				"read": true,
 				"write": true,
 				"def": "noset",
-				"states": {  
-					"default": "default",
-					"full": "full",
-					"fixedLeft": "fixedLeft",
-					"fixedMidLeft": "fixedMidLeft",
-					"fixedMid": "fixedMid",
-					"fixedMidRight": "fixedMidRight",
-					"fixedRight": "fixedRight" 
-				}
+				"states": [
+					"default",
+					"full",
+					"fixedLeft",
+					"fixedMidLeft",
+					"fixedMid",
+					"fixedMidRight",
+					"fixedRight"
+				]
 			},
 			"native": {}
 		},{
@@ -291,20 +291,20 @@
 				"read": true,
 				"write": true,
 				"def": "noset",
-				"states": { 
-					"default": "default",
-					"full": "full",
-					"fixedTop": "fixedTop",
-					"fixedMidTop": "fixedMidTop",
-					"fixedMid": "fixedMid",
-					"fixedMidBottom": "fixedMidBottom",
-					"fixedBottom": "fixedBottom",
-					"swingBottom": "swingBottom",
-					"swingMidBottom": "swingMidBottom",
-					"swingMid": "swingMid",
-					"swingMidTop": "swingMidTop",
-					"swingTop":"swingTop"
-				}
+				"states": [
+					"default",
+					"full",
+					"fixedTop",
+					"fixedMidTop",
+					"fixedMid",
+					"fixedMidBottom",
+					"fixedBottom",
+					"swingBottom",
+					"swingMidBottom",
+					"swingMid",
+					"swingMidTop",
+					"swingTop" 
+				]
 			},
 			"native": {}
 		},{
@@ -316,7 +316,7 @@
 				"type": "string",
 				"read": true,
 				"write": false,
-				"def": "noset"
+				"def": "{}"
 			},
 			"native": {}
 		},{
@@ -328,7 +328,7 @@
 				"type": "string",
 				"read": true,
 				"write": false,
-				"def": "noset"
+				"def": "{}"
 			},
 			"native": {}
 		}
