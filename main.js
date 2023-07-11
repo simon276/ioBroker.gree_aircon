@@ -43,7 +43,7 @@ class GreeAircon extends utils.Adapter {
 
 		// The adapters config (in the instance object everything under the attribute "native") is accessible via
 		// this.config:
-		this.log.info('config ipAddress: ' + this.config.ipAddress);
+		this.log.debug('config ipAddress: ' + this.config.ipAddress);
 
 
 		// in this template all states changes inside the adapters namespace are subscribed
@@ -58,7 +58,8 @@ class GreeAircon extends utils.Adapter {
 			this.setState('info.connection', true, true);
 		});
 		this.Greeclient.on('no_response', () => {
-			this.log.warn('Client no response');
+			this.log.warn('no response from client: ' + this.config.ipAddress);
+			this.setState('info.connection', false, true);
 		});
 		this.Greeclient.on('update', this.onGreeUpdate.bind(this));
 	}
@@ -69,10 +70,13 @@ class GreeAircon extends utils.Adapter {
 	 * 
 	 */
 	onGreeUpdate(updatedProperties, properties) {
+		// set connected property, if it was may previously disconnected
+		this.setState('info.connection', true, true);
+
 		const updateJson = JSON.stringify(updatedProperties);
 		const propJson = JSON.stringify(properties);
-		this.log.info('ClientPollUpdate: updatesProperties:' + updateJson);
-		this.log.info('ClientPollUpdate: nowProperties:' + propJson);
+		this.log.debug('ClientPollUpdate: updatesProperties:' + updateJson);
+		this.log.debug('ClientPollUpdate: nowProperties:' + propJson);
 		this.currentProperties = properties;
 		if ('lights' in updatedProperties)
 			this.setStateAsync('lights', updatedProperties.lights == 'on' ? true : false, true);
@@ -123,7 +127,7 @@ class GreeAircon extends utils.Adapter {
 	onUnload(callback) {
 		try {
 			this.Greeclient.disconnect();
-			//this.log.info('cleaned everything up...');
+			//this.log.debug('cleaned everything up...');
 			callback();
 		} catch (e) {
 			callback();
@@ -139,10 +143,10 @@ class GreeAircon extends utils.Adapter {
 
 		if (obj) {
 			// The object was changed
-			this.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
+			this.log.debug(`object ${id} changed: ${JSON.stringify(obj)}`);
 		} else {
 			// The object was deleted
-			this.log.info(`object ${id} deleted`);
+			this.log.debug(`object ${id} deleted`);
 		}
 	}
 
@@ -285,10 +289,10 @@ class GreeAircon extends utils.Adapter {
 				}
 
 			}
-			//this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack}) (state=${JSON.stringify(state)})`);
+			//this.log.debug(`state ${id} changed: ${state.val} (ack = ${state.ack}) (state=${JSON.stringify(state)})`);
 		} else {
 			// The state was deleted
-			//this.log.info(`state ${id} deleted`);
+			//this.log.debug(`state ${id} deleted`);
 		}
 	}
 
@@ -301,7 +305,7 @@ class GreeAircon extends utils.Adapter {
 	// 	if (typeof obj === 'object' && obj.message) {
 	// 		if (obj.command === 'send') {
 	// 			// e.g. send email or pushover or whatever
-	// 			this.log.info('send command');
+	// 			this.log.debug('send command');
 
 	// 			// Send response in callback if required
 	// 			if (obj.callback) this.sendTo(obj.from, obj.command, 'Message received', obj.callback);
