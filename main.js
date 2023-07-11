@@ -256,6 +256,9 @@ class GreeAircon extends utils.Adapter {
 							this.setStateAsync('swinghor', this.currentProperties.swinghor, true);//ack...
 							break;
 						}
+						this.Greeclient.setProperty(Gree.PROPERTY.swinghor, state.val);
+						this.setStateAsync('swinghor', state.val, true);//ack...
+						break
 					}
 					case 'swingvert': {
 						if (!['default', 'full', 'fixedTop', 'fixedMidTop', 'fixedMid', 'fixedMidBottom', 'fixedBottom', 'swingBottom', 'swingMidBottom', 'swingMid', 'swingMidTop', 'swingTop'].includes(state.val)) {
@@ -263,6 +266,9 @@ class GreeAircon extends utils.Adapter {
 							this.setStateAsync('swingvert', this.currentProperties.swingvert, true);//ack...
 							break;
 						}
+						this.Greeclient.setProperty(Gree.PROPERTY.swingvert, state.val);
+						this.setStateAsync('swingvert', state.val, true);//ack...
+						break
 					} 
 				}
 
