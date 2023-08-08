@@ -261,7 +261,7 @@
 			},
 			"native": {}
 		},{
-			"_id": "swinghor",
+			"_id": "swingHor",
 			"type": "state",
 			"common": {
 				"role": "level.mode.swing",
@@ -282,7 +282,7 @@
 			},
 			"native": {}
 		},{
-			"_id": "swingvert",
+			"_id": "swingVert",
 			"type": "state",
 			"common": {
 				"role": "level.mode.swing",
