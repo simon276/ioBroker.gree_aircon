@@ -106,14 +106,15 @@ class GreeAircon extends utils.Adapter {
 		if ('currentTemperature' in updatedProperties) // In degrees Celsius by default. (Read-only)
 		this.setStateAsync('currentTemperature', parseInt(updatedProperties.currentTemperature,10) , true);
 		
-		if ('swinghor' in updatedProperties) // default, full, fixedLeft, fixedMidLeft, fixedMid, fixedMidRight, fixedRight
-		this.setStateAsync('swinghor', updatedProperties.swinghor, true);
+		if ('swingHor' in updatedProperties) // default, full, fixedLeft, fixedMidLeft, fixedMid, fixedMidRight, fixedRight
+		this.setStateAsync('swingHor', updatedProperties.swingHor, true);
 		
-		if ('swingvert' in updatedProperties) // default, full, fixedTop, fixedMidTop, fixedMid, fixedMidBottom, fixedBottom, swingBottom, swingMidBottom, swingMid, swingMidTop, swingTop
-		this.setStateAsync('swingvert', updatedProperties.swingvert, true);
+		if ('swingVert' in updatedProperties) // default, full, fixedTop, fixedMidTop, fixedMid, fixedMidBottom, fixedBottom, swingBottom, swingMidBottom, swingMid, swingMidTop, swingTop
+		this.setStateAsync('swingVert', updatedProperties.swingVert, true);
 
 		// add raw values
-		if(updateJson) this.setStateAsync('updateJsonRaw', updateJson, true);
+		if (updateJson) this.setStateAsync('updateJsonRaw', updateJson, true);
+		// {"swingVert":"fixedMid"}
 		// if (properties) this.setStateAsync('propertiesRaw', properties, true);
 		
 		  
@@ -254,34 +255,34 @@ class GreeAircon extends utils.Adapter {
 						this.setStateAsync('powerSave', state.val, true);//ack...
 						break;
 					}
-					case 'swinghor': {
+					case 'swingHor': {
 						try {
 
 							if (!['default', 'full', 'fixedLeft', 'fixedMidLeft', 'fixedMid', 'fixedMidRight', 'fixedRight'].includes(state.val)) {
 								this.log.error(`tried to set bad value for ${propName}:"${state.val}". Source:${state.from}`);
-								this.setStateAsync('swinghor', this.currentProperties.swinghor, true);//ack...
+								this.setStateAsync('swingHor', this.currentProperties.swingHor, true);//ack...
 								break;
 							}
-							this.Greeclient.setProperty(Gree.PROPERTY.swinghor, state.val);
-							this.setStateAsync('swinghor', state.val, true);//ack...
+							this.Greeclient.setProperty(Gree.PROPERTY.swingHor, state.val);
+							this.setStateAsync('swingHor', state.val, true);//ack...
 						} catch(e) {
-							this.log.error(`could not set swinghor to ${state.val}: ${e.message}`)
+							this.log.error(`could not set swingHor to ${state.val}: ${e.message}`)
 						} finally {
 							break
 						}
 					}
-					case 'swingvert': {
+					case 'swingVert': {
 						try {
 
 							if (!['default', 'full', 'fixedTop', 'fixedMidTop', 'fixedMid', 'fixedMidBottom', 'fixedBottom', 'swingBottom', 'swingMidBottom', 'swingMid', 'swingMidTop', 'swingTop'].includes(state.val)) {
 								this.log.error(`tried to set bad value for ${propName}:"${state.val}". Source:${state.from}`);
-								this.setStateAsync('swingvert', this.currentProperties.swingvert, true);//ack...
+								this.setStateAsync('swingVert', this.currentProperties.swingVert, true);//ack...
 								break;
 							}
-							this.Greeclient.setProperty(Gree.PROPERTY.swingvert, state.val);
-							this.setStateAsync('swingvert', state.val, true);//ack...
+							this.Greeclient.setProperty(Gree.PROPERTY.swingVert, state.val);
+							this.setStateAsync('swingVert', state.val, true);//ack...
 						} catch(e) {
-							this.log.error(`could not set swingvert to ${state.val}: ${e.message}`)
+							this.log.error(`could not set swingVert to ${state.val}: ${e.message}`)
 						} finally {
 							break
 						}
